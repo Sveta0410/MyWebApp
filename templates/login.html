@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <form action="" method="post">
+		{% if err_empty %}
+        <p> Enter your username and your password!</p>
+        {% endif %}
+
+		{% if err_not_in_db %}
+        <p> Error. Check your password or click the registration button. </p>
+        {% endif %}
+
+        <p>
+	    <label for="username">Username</label>
+	    <input type="text" name="username">
+	</p>
+	<p>
+	    <label for="password">Password</label>
+	    <input type="password" name="password">
+	</p>
+	<p>
+	    <input type="submit">
+	</p>
+    </form>
+
+</body>
+</html>
