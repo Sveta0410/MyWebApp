@@ -6,6 +6,16 @@
 </head>
 <body>
     <form action="" method="post">
+	{% if err_empty %}
+    <p> Enter your name, login and password!</p>
+    {% endif %}
+	{% if err_space %}
+    <p> There should be no spaces in your login and password!</p>
+    {% endif %}
+    {% if err_in_db %}
+    <p> This login already exists!</p>
+    {% endif %}
+
       <p>
     <label for="name">Your name:</label>
     <input type="text" name="name">

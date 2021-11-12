@@ -39,11 +39,19 @@ def registration():
         name = request.form.get('name')
         login = request.form.get('login')
         password = request.form.get('password')
-
-        cursor.execute('INSERT INTO service.users (full_name, login, password) VALUES (%s, %s, %s);',
+        cursor.execute("SELECT * FROM service.users WHERE login=%s AND NOT password=%s", (str(login), ''))
+        records1 = list(cursor.fetchall())
+        if name == '' or login == '' or password == '':
+            return render_template("registration.html", err_empty=2)
+        elif ' ' in login or ' ' in password:
+            return render_template("registration.html", err_space=2)
+        elif records1:
+            return render_template("registration.html", err_in_db=2)
+        else:
+            cursor.execute('INSERT INTO service.users (full_name, login, password) VALUES (%s, %s, %s);',
                        (str(name), str(login), str(password)))
-        conn.commit()
+            conn.commit()
 
-        return redirect('/login/')
+            return redirect('/login/')
 
     return render_template('registration.html')
